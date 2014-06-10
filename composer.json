@@ -1,0 +1,26 @@
+{
+    "name": "firemango/bus-driver",
+    "description": "",
+    "authors": [
+        {
+            "name": "Kasper Bentsen",
+            "email": "kasper@firemango.dk"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "require-dev": {
+	"phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Firemango\\BusDriver\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
