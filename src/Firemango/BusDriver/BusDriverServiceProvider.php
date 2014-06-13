@@ -18,7 +18,7 @@ class BusDriverServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('firemango/bus-driver');
+		$this->package('Firemango/BusDriver');
 	}
 
 	/**
