@@ -17,7 +17,7 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "tests/WorkbenchTestCase.php"
         ],
         "psr-0": {
             "Firemango\\BusDriver\\": "src/"

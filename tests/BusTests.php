@@ -1,14 +1,19 @@
 <?php
 
 use Firemango\BusDriver\BusDriver;
-use Firemango\BusDriver\Command\ICommandable;
 
-class BusTests extends \PHPUnit_Framework_TestCase {
+class BusTests extends WorkbenchTestCase {
+
+    private $busdriver;
+
+    public function __construct(BusDriver $busdriver)
+    {
+        $this->busdriver = $busdriver;
+    }
 
     public function testBusDriverTransportsCommandObject()
     {
-        $busdriver = new BusDriver();
-        $busdriver->transport(new ExampleCommand());
+        $this->busdriver->transport(new ExampleCommand());
     }
 }
 
