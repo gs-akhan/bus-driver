@@ -30,8 +30,6 @@ class TaskDoneCommand {
 
 class TaskDoneCommandHandler implements HandlerInterface {
 
-    use EventGenerator;
-
     function handle($command)
     {
 
