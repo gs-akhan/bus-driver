@@ -1,27 +1,18 @@
 <?php
 
-use Firemango\BusDriver\Command\ICommandable;
 use Firemango\BusDriver\Command\CommandTranslator;
 
-class CommandTests extends \PHPUnit_Framework_TestCase {
+class CommandTests extends WorkbenchTestCase {
 
     public function testCommandTranslatorReturnsCommandHandler()
     {
-        $handler = (new CommandTranslator())->getHandler(new ExampleTranslatorCommand());
-        $this->assertInstanceOf($handler, new ExampleTranslatorCommandHandler());
+        $handler = (new CommandTranslator())->getHandler(new TaskDoneCommand());
+        $this->assertInstanceOf($handler, new TaskDoneCommandHandler());
     }
 
     public function testCommandTranslatorThrowsErrorOnFail()
     {
         $this->setExpectedException("Firemango\BusDriver\Command\HandlerNotFoundException");
-        (new CommandTranslator())->getHandler(new ExampleCommand());
+        (new CommandTranslator())->getHandler(new \stdClass());
     }
-}
-
-class ExampleTranslatorCommand {
-
-}
-
-class ExampleTranslatorCommandHandler {
-
 }

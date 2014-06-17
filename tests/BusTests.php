@@ -1,22 +1,35 @@
 <?php
 
-use Firemango\BusDriver\BusDriver;
+use Firemango\BusDriver\Command\HandlerInterface;
+use Firemango\BusDriver;
 
 class BusTests extends WorkbenchTestCase {
 
-    private $busdriver;
+    protected $taskDoneCommand;
+    protected $busdriver;
+    protected $application;
 
-    public function __construct(BusDriver $busdriver)
+    public function setUp()
     {
-        $this->busdriver = $busdriver;
+        parent::setUp();
+
+        $this->busdriver = \App::make('Firemango\BusDriver\BusDriver');
     }
 
     public function testBusDriverTransportsCommandObject()
     {
-        $this->busdriver->transport(new ExampleCommand());
+        $this->busdriver->transport(new TaskDoneCommand());
     }
+
 }
 
-class ExampleCommand {
+class TaskDoneCommand {
 
+}
+
+class TaskDoneCommandHandler implements HandlerInterface {
+    function handle($command)
+    {
+
+    }
 }

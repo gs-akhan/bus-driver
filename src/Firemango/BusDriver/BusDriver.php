@@ -1,17 +1,14 @@
 <?php namespace Firemango\BusDriver;
 
-use Illuminate\Foundation\Application;
 use Firemango\BusDriver\Command\CommandTranslator;
 
 class BusDriver {
 
     private $commandTranslator;
-    private $application;
 
-    public function __construct(Application $application, CommandTranslator $translator)
+    public function __construct(CommandTranslator $translator)
     {
         $this->commandTranslator = $translator;
-        $this->application = $application;
     }
 
     /**
@@ -25,8 +22,7 @@ class BusDriver {
     public function transport($command)
     {
         $handler = $this->commandTranslator->getHandler($command);
-
-        return $this->application->make($handler)->handle($command);
+        return \App::make($handler)->handle($command);
     }
 
 }
