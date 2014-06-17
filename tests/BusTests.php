@@ -1,6 +1,7 @@
 <?php
 
 use Firemango\BusDriver\Command\HandlerInterface;
+use Firemango\BusDriver\Event\EventGenerator;
 use Firemango\BusDriver;
 
 class BusTests extends WorkbenchTestCase {
@@ -28,6 +29,9 @@ class TaskDoneCommand {
 }
 
 class TaskDoneCommandHandler implements HandlerInterface {
+
+    use EventGenerator;
+
     function handle($command)
     {
 

@@ -14,7 +14,8 @@ class BusDriver {
     /**
      * Transport
      *
-     * Starts the command chain and returns the result.
+     * Starts the command chain by getting the appropriate CommandHandler
+     * and returns the Handled result.
      *
      * @param $command
      */
