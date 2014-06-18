@@ -19,7 +19,7 @@ class BusTests extends WorkbenchTestCase {
 
     public function testBusDriverTransportsCommandObject()
     {
-        $this->busdriver->transport(new TaskDoneCommand());
+        $this->assertEquals("test", $this->busdriver->transport(new TaskDoneCommand()));
     }
 
 }
@@ -32,6 +32,6 @@ class TaskDoneCommandHandler implements HandlerInterface {
 
     function handle($command)
     {
-
+        return "test";
     }
 }

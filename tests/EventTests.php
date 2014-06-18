@@ -2,6 +2,7 @@
 
 use Firemango\BusDriver\Event\EventGenerator;
 use Firemango\BusDriver\Event\EventDispatcher;
+use Firemango\BusDriver\Event\EventListener;
 
 class EventTests extends WorkbenchTestCase {
 
@@ -43,10 +44,22 @@ class EventTests extends WorkbenchTestCase {
                         ->once()
                         ->getMock();
 
-        $this->entity->iAmDone(new EventDone($this->entity));
+        $this->entity->raise(new EventDone($this->entity));
 
         $dispatcher = new EventDispatcher($mock);
         $dispatcher->dispatch($this->entity->release());
+    }
+
+    public function testEventListenerIsFired()
+    {
+        \Event::listen('EventDone', 'Listener');
+
+        $this->entity->raise(new EventDone($this->entity));
+
+        $dispatcher = App::make("Firemango\BusDriver\Event\EventDispatcher");
+        $dispatcher->dispatch($this->entity->release());
+
+        // TODO: Finish test
     }
 
 }
@@ -55,16 +68,11 @@ class EventTests extends WorkbenchTestCase {
 
 class EntityObject {
     use EventGenerator;
-
-    public function iAmDone($eventObject)
-    {
-        $this->raise($eventObject);
-    }
 }
 
-class EventDone {
-    public function __construct(EntityObject $entityObject)
-    {
+class EventDone { }
 
-    }
+class Listener extends EventListener {
+    public function whenEventDone(EventDone $event) { }
+
 }
