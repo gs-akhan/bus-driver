@@ -2,36 +2,18 @@
 
 use Firemango\BusDriver\Event\EventGenerator;
 use Firemango\BusDriver\Event\EventDispatcher;
-use Firemango\BusDriver\Event\EventListener;
 
-class EventTests extends WorkbenchTestCase {
-
-    private $entity;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->entity = new EntityObject();
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
-    }
+class EventTests extends EventTestCase {
 
     public function testAddEventToQueue()
     {
-        $event = new TaskDoneCommand(new \stdClass());
-        $this->entity->raise($event);
-
-        $this->assertEquals($this->entity->release()[0], $event);
+        $this->entity->raise($this->event);
+        $this->assertEquals($this->entity->release()[0], $this->event);
     }
 
     public function testAddEventQueueIsClearedAfterReleasing()
     {
-        $event = new EventDone($this->entity);
-        $this->entity->raise($event);
-
+        $this->entity->raise($this->event);
         $this->entity->release();
 
         $this->assertEquals(count($this->entity->release()), 0);
@@ -61,18 +43,5 @@ class EventTests extends WorkbenchTestCase {
 
         // TODO: Finish test
     }
-
-}
-
-/*** Mocks ***/
-
-class EntityObject {
-    use EventGenerator;
-}
-
-class EventDone { }
-
-class Listener extends EventListener {
-    public function whenEventDone(EventDone $event) { }
 
 }
